@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:34:00 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 14:30:36 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 14:39:23 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	split1(unsigned int n, t_flags elem, int *j)
 	int	i;
 
 	i = 0;
-	if (ft_strchr(elem.options, '#') && elem.accuracy == -1)
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n)
 	{
 		ft_putstr("0x");
 		*j = 1;
@@ -72,17 +72,9 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 	i = split1(n, elem, &j);
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
-		while (elem.width > s + ((((ft_strchr(elem.options, ' ') ||
-									ft_strchr(elem.options, '+')) &&
-								   n > 0)
-									  ? 1
-									  : 0) +
-								 (elem.accuracy != -1 ? elem.accuracy - s : 0)))
+		while (elem.width > s + (elem.accuracy != -1 && elem.accuracy > s ? elem.accuracy - s : 0))
 		{
-			ft_putchar(ft_strchr(elem.options, '0') &&
-							   elem.accuracy == -1
-						   ? '0'
-						   : ' ');
+			ft_putchar(ft_strchr(elem.options, '0') && elem.accuracy == -1 ? '0' : ' ');
 			elem.width--;
 			i++;
 		}
