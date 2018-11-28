@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:47:48 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 02:27:42 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 15:34:38 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ static int split3(unsigned int n, int s, t_flags elem)
 	i = 0;
 	if (elem.accuracy != -1)
 	{
-		if (ft_strchr(elem.options, '+'))
-		{
-			ft_putchar('+');
-			i++;
-		}
+		if (ft_strchr(elem.options, '#') && n)
+			ft_putchar('0');
 		while (elem.accuracy-- > s)
 		{
 			ft_putchar('0');
@@ -33,7 +30,7 @@ static int split3(unsigned int n, int s, t_flags elem)
 	return (i);
 }
 
-static int split2(unsigned int n, int s, int u, t_flags elem)
+static int split2(unsigned int n, int w, int s, int u, t_flags elem)
 {
 	int i;
 	int c;
@@ -56,40 +53,38 @@ static int split2(unsigned int n, int s, int u, t_flags elem)
 static int print_padding(unsigned int n, int s, t_flags elem)
 {
 	int i;
+	int w;
 	int u;
 	int j;
 
 	i = 0;
+	w = elem.width;
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && (elem.width < s || ft_strchr(elem.options, '0')) && n)
+		ft_putchar('0');
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
-		while (elem.width > s + ((((ft_strchr(elem.options, ' ') ||
-									ft_strchr(elem.options, '+')) &&
-								   n > 0)
-									  ? 1
-									  : 0) +
-								 (elem.accuracy != -1 ? elem.accuracy - s : 0)))
+		while (elem.width > s + (elem.accuracy != -1 && elem.accuracy > s ? elem.accuracy - s : 0))
 		{
-			ft_putchar(ft_strchr(elem.options, '0') &&
-							   elem.accuracy == -1
-						   ? '0'
-						   : ' ');
+			ft_putchar(ft_strchr(elem.options, '0') && elem.accuracy == -1 ? '0' : ' ');
 			elem.width--;
 			i++;
 		}
 	}
 	u = elem.accuracy;
-	return (i + split2(n, s, u, elem));
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n && w > s && !ft_strchr(elem.options, '0'))
+		ft_putchar('0');
+	return (i + split2(n, w, s, u, elem));
 }
 
-int		print_o(va_list ap, t_flags elem)
+int print_o(va_list ap, t_flags elem)
 {
-	unsigned int	n;
-	unsigned int	cp;
-	int				i;
+	unsigned int n;
+	unsigned int cp;
+	int i;
 
 	i = 1;
-	if (ft_strchr(elem.options, '#'))
-		i += 2;
+	if (ft_strchr(elem.options, '#') && n)
+		i++;
 	n = va_arg(ap, unsigned int);
 	cp = n;
 	while (cp > 7)
@@ -97,5 +92,5 @@ int		print_o(va_list ap, t_flags elem)
 		cp /= 8;
 		i++;
 	}
-	return (n == 0 && elem.accuracy == 0 ? print_padding(n, i, elem) : i + print_padding(n, i, elem));
+	return (n == 0 && elem.accuracy == 0 ? print_padding(n, 0, elem) : i + print_padding(n, i, elem));
 }
