@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:34:00 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 14:58:35 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 15:10:15 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static int split2(unsigned int n, int w, int s, int u, t_flags elem)
 	int c;
 
 	i = split3(n, s, elem);
-	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n && w > s)
-		ft_putstr("0x");
 	if (n || (!n && elem.accuracy != 0))
 		print_lllsx((unsigned long long)n);
 	if (ft_strchr(elem.options, '-') && elem.width)
@@ -61,7 +59,7 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 
 	i = 0;
 	w = elem.width;
-	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && elem.width < s && n)
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && (elem.width < s || ft_strchr(elem.options, '0')) && n)
 		ft_putstr("0x");
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
@@ -73,6 +71,8 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 		}
 	}
 	u = elem.accuracy;
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n && w > s && !ft_strchr(elem.options, '0'))
+		ft_putstr("0x");
 	return (i + split2(n, w, s, u, elem));
 }
 
@@ -92,5 +92,5 @@ int		print_sx(va_list ap, t_flags elem)
 		cp /= 16;
 		i++;
 	}
-	return (n == 0 && elem.accuracy == 0 ? print_padding(n, i, elem) : i + print_padding(n, i, elem));
+	return (n == 0 && elem.accuracy == 0 ? print_padding(n, 0, elem) : i + print_padding(n, i, elem));
 }
