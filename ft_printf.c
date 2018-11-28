@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 01:49:49 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 14:20:44 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	(*g_array_print[52])(va_list, t_flags) = {
 	print_hhbx,
 	print_lbx,
 	print_llbx,
-	0,
+	print_per,
 	0,
 	0,
 	0,
@@ -74,19 +74,19 @@ int		dispatcher(t_flags elem, va_list ap)
 	char	*flags;
 
 	i = 0;
-	flags = "cspdiouxX";
+	flags = "cspdiouxX%";
 	while (flags[i] != elem.conv && flags[i])
 		i++;
 	i *= 5;
-	if (!(ft_strcmp(elem.size, "h")))
+	if (!(ft_strcmp(elem.size, "h")) && elem.conv != '%')
 		i++;
-	if (!(ft_strcmp(elem.size, "hh")))
+	if (!(ft_strcmp(elem.size, "hh")) && elem.conv != '%')
 		i += 2;
-	if (!(ft_strcmp(elem.size, "l")))
+	if (!(ft_strcmp(elem.size, "l")) && elem.conv != '%')
 		i += 3;
-	if (!(ft_strcmp(elem.size, "ll")))
+	if (!(ft_strcmp(elem.size, "ll")) && elem.conv != '%')
 		i += 4;
-	return (g_array_print[i](ap, elem));
+	return (i != 10 ? g_array_print[i](ap, elem) : 0);
 }
 
 int			ft_printf(const char *format, ...)
@@ -111,8 +111,7 @@ int			ft_printf(const char *format, ...)
 		{
 			if (list[ct].conv == '%')
 			{
-				ft_putchar('%');
-				res++;
+				res += dispatcher(list[ct], ap);
 				i++;
 				while (format[i] != '%')
 					i++;

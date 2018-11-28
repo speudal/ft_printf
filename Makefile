@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 13:08:51 by tduval            #+#    #+#              #
-#    Updated: 2018/11/27 19:11:03 by tduval           ###   ########.fr        #
+#    Updated: 2018/11/28 14:11:47 by tduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS	=	ft_putchar.c		\
 			print_c.c			\
 			print_s.c			\
 			print_p.c			\
+			print_per.c			\
 			print_d.c			\
 			print_hd.c			\
 			print_hhd.c			\

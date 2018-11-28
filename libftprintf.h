@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 13:20:44 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/27 16:59:32 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 14:11:30 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char    *ft_strncpy(char *dst, const char *src, size_t len);
 int		print_c(va_list ap, t_flags elem);
 int		print_s(va_list ap, t_flags elem);
 int		print_p(va_list ap, t_flags elem);
+int		print_per(va_list ap, t_flags elem);
 int		print_d(va_list ap, t_flags elem);
 int		print_hd(va_list ap, t_flags elem);
 int		print_hhd(va_list ap, t_flags elem);
