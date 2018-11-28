@@ -6,10 +6,11 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:47:48 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 15:34:38 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 15:49:43 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libftprintf.h"
 
 static int split3(unsigned int n, int s, t_flags elem)
@@ -36,7 +37,7 @@ static int split2(unsigned int n, int w, int s, int u, t_flags elem)
 	int c;
 
 	i = split3(n, s, elem);
-	if (n || (!n && elem.accuracy != 0))
+	if (n || (!n && elem.accuracy != 0) || ft_strchr(elem.options, '#'))
 		print_lllo((unsigned long long)n);
 	if (ft_strchr(elem.options, '-') && elem.width)
 	{
@@ -83,9 +84,11 @@ int print_o(va_list ap, t_flags elem)
 	int i;
 
 	i = 1;
-	if (ft_strchr(elem.options, '#') && n)
-		i++;
 	n = va_arg(ap, unsigned int);
+	if (ft_strchr(elem.options, '#'))
+		i++;
+	if (ft_strchr(elem.options, '#') && !n)
+		return ((int)write(1, "0", 1));
 	cp = n;
 	while (cp > 7)
 	{

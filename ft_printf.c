@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 14:20:44 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 15:59:30 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		dispatcher(t_flags elem, va_list ap)
 		i += 2;
 	if (!(ft_strcmp(elem.size, "l")) && elem.conv != '%')
 		i += 3;
-	if (!(ft_strcmp(elem.size, "ll")) && elem.conv != '%')
+	if ((!(ft_strcmp(elem.size, "ll")) || !(ft_strcmp(elem.size, "j"))) && elem.conv != '%')
 		i += 4;
 	return (i != 10 ? g_array_print[i](ap, elem) : 0);
 }
