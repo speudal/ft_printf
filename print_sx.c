@@ -6,24 +6,11 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:34:00 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 14:39:23 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 14:58:35 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-static int	split1(unsigned int n, t_flags elem, int *j)
-{
-	int	i;
-
-	i = 0;
-	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n)
-	{
-		ft_putstr("0x");
-		*j = 1;
-	}
-	return (i);
-}
 
 static int split3(unsigned int n, int s, t_flags elem)
 {
@@ -32,7 +19,7 @@ static int split3(unsigned int n, int s, t_flags elem)
 	i = 0;
 	if (elem.accuracy != -1)
 	{
-		if (ft_strchr(elem.options, '#'))
+		if (ft_strchr(elem.options, '#') && n)
 			ft_putstr("0x");
 		while (elem.accuracy-- > s)
 		{
@@ -43,12 +30,14 @@ static int split3(unsigned int n, int s, t_flags elem)
 	return (i);
 }
 
-static int split2(unsigned int n, int s, int u, t_flags elem)
+static int split2(unsigned int n, int w, int s, int u, t_flags elem)
 {
 	int i;
 	int c;
 
 	i = split3(n, s, elem);
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n && w > s)
+		ft_putstr("0x");
 	if (n || (!n && elem.accuracy != 0))
 		print_lllsx((unsigned long long)n);
 	if (ft_strchr(elem.options, '-') && elem.width)
@@ -66,10 +55,14 @@ static int split2(unsigned int n, int s, int u, t_flags elem)
 static int print_padding(unsigned int n, int s, t_flags elem)
 {
 	int i;
+	int	w;
 	int u;
 	int j;
 
-	i = split1(n, elem, &j);
+	i = 0;
+	w = elem.width;
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && elem.width < s && n)
+		ft_putstr("0x");
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
 		while (elem.width > s + (elem.accuracy != -1 && elem.accuracy > s ? elem.accuracy - s : 0))
@@ -80,7 +73,7 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 		}
 	}
 	u = elem.accuracy;
-	return (i + split2(n, s, u, elem));
+	return (i + split2(n, w, s, u, elem));
 }
 
 int		print_sx(va_list ap, t_flags elem)
