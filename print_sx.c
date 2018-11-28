@@ -6,12 +6,24 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:34:00 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 02:40:47 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 14:30:36 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
+static int	split1(unsigned int n, t_flags elem, int *j)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1)
+	{
+		ft_putstr("0x");
+		*j = 1;
+	}
+	return (i);
+}
 
 static int split3(unsigned int n, int s, t_flags elem)
 {
@@ -20,6 +32,8 @@ static int split3(unsigned int n, int s, t_flags elem)
 	i = 0;
 	if (elem.accuracy != -1)
 	{
+		if (ft_strchr(elem.options, '#'))
+			ft_putstr("0x");
 		while (elem.accuracy-- > s)
 		{
 			ft_putchar('0');
@@ -55,7 +69,7 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 	int u;
 	int j;
 
-	i = 0;
+	i = split1(n, elem, &j);
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
 		while (elem.width > s + ((((ft_strchr(elem.options, ' ') ||
