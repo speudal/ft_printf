@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:28:48 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 01:33:54 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 13:58:33 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_flags			fill_flags(const char *str)
 	elem = split_fill(str, &i, elem);
 	while (ft_isdigit(str[i]))
 		i++;
-	while (field_n(str[i], 2))
+	while (!field_n(str[i], 3) && str[i])
 	{
 		elem.size[j] = str[i];
 		i++;
