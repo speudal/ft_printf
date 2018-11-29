@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:35:58 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 03:53:30 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 04:20:24 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ static int split2(long n, int s, int u, t_flags elem)
 	i = 0;
 	if (elem.accuracy != -1)
 	{
-		while (elem.accuracy-- > s)
+		while (elem.accuracy > s)
 		{
+			elem.accuracy--;
 			ft_putchar('0');
 			i++;
 		}
 	}
 	if (!ft_strchr(elem.options, '0') && n < 0)
 		ft_putchar('-');
-	print_llld((long long)n);
+	if (n || (!n && elem.accuracy != 0))
+		print_llld((long long)n);
 	if (ft_strchr(elem.options, '-') && elem.width)
 	{
 		while (elem.width > s + ((ft_strchr(elem.options, ' ') || ft_strchr(elem.options, '+')) ? 1 : 0) + (u != -1 ? u - s : 0))
