@@ -6,29 +6,30 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 15:59:30 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 01:32:22 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
+#include <unistd.h>
 #include "libftprintf.h"
 
-int	(*g_array_print[52])(va_list, t_flags) = {
+int	(*g_array_print[80])(va_list, t_flags) = {
 	print_c,
-	0,
-	0,
-	0,
-	0,
+	print_c,
+	print_c,
+	print_c,
+	print_c,
 	print_s,
-	0,
-	0,
-	0,
-	0,
+	print_s,
+	print_s,
+	print_s,
+	print_s,
 	print_p,
-	0,
-	0,
-	0,
-	0,
+	print_p,
+	print_p,
+	print_p,
+	print_p,
 	print_d,
 	print_hd,
 	print_hhd,
@@ -59,7 +60,26 @@ int	(*g_array_print[52])(va_list, t_flags) = {
 	print_hhbx,
 	print_lbx,
 	print_llbx,
-	print_per,
+	print_ld,
+	print_ld,
+	print_ld,
+	print_ld,
+	print_ld,
+	print_lo,
+	print_lo,
+	print_lo,
+	print_lo,
+	print_lo,
+	print_lu,
+	print_lu,
+	print_lu,
+	print_lu,
+	print_lu,
+	0,
+	0,
+	0,
+	0,
+	0,
 	0,
 	0,
 	0,
@@ -68,16 +88,26 @@ int	(*g_array_print[52])(va_list, t_flags) = {
 	0
 };
 
+static int	check_sizes(char *str, char conv)
+{
+	return (!ft_strchr("cspdiouxXDOU%", conv) || (ft_strcmp(str, "h") && ft_strcmp(str, "hh") && ft_strcmp(str, "l") && ft_strcmp(str, "ll") && ft_strcmp(str, "") && ft_strcmp(str, "z") && ft_strcmp(str, "j")));
+}
+
 int		dispatcher(t_flags elem, va_list ap)
 {
 	int		i;
 	char	*flags;
 
 	i = 0;
-	flags = "cspdiouxX%";
+	if (!elem.conv)
+		return (0);
+	flags = "cspdiouxXDOU";
 	while (flags[i] != elem.conv && flags[i])
 		i++;
+	i %= 13;
 	i *= 5;
+	if (check_sizes(elem.size, elem.conv))
+		return (0);
 	if (!(ft_strcmp(elem.size, "h")) && elem.conv != '%')
 		i++;
 	if (!(ft_strcmp(elem.size, "hh")) && elem.conv != '%')
@@ -86,8 +116,25 @@ int		dispatcher(t_flags elem, va_list ap)
 		i += 3;
 	if ((!(ft_strcmp(elem.size, "ll")) || !(ft_strcmp(elem.size, "j"))) && elem.conv != '%')
 		i += 4;
-	return (i != 10 ? g_array_print[i](ap, elem) : 0);
+	if ((!(ft_strcmp(elem.size, "z")) && elem.conv == 'd'))
+		return (print_lld(ap, elem));
+	if (elem.conv == '%')
+		return (print_per(elem));
+	return (g_array_print[i] ? g_array_print[i](ap, elem) : 0);
 }
+/*
+static void	free_whole(t_flags *list, int ct)
+{
+	int		i;
+
+	i = 0;
+	while (i < ct)
+	{
+			free(list[i].options);
+			free(list[i].size);
+		i++;
+	}
+}*/
 
 int			ft_printf(const char *format, ...)
 {
@@ -98,13 +145,17 @@ int			ft_printf(const char *format, ...)
 	int		u;
 	int		i;
 
+	list = 0;
 	u = 0;
 	res = 0;
 	ct = 0;
 	i = 0;
+	if (ft_strlen(format) < 2)
+		return ((int)write(1, format, ft_strlen(format)));
 	va_start(ap, format);
 	if (!(list = get_flags(format)))
 		return (-1);
+	u = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -119,7 +170,7 @@ int			ft_printf(const char *format, ...)
 			else
 			{
 				res += dispatcher(list[ct], ap);
-				while (!ft_strchr("cdfiopsuxX", format[i]) && format[i])
+				while (!ft_strchr("cdfiopsuxXDOU", format[i]) && format[i])
 					i++;
 			}
 			i++;
@@ -132,7 +183,8 @@ int			ft_printf(const char *format, ...)
 			i++;
 		}
 	}
-	free(list);
+	/*free_whole(list, ct);
+	free(list);*/
 	va_end(ap);
 	return (res);
 }

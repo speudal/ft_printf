@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 23:35:55 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 02:07:20 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 21:12:43 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_lllu(unsigned long long n)
 	ft_putchar(n % 10 + 48);
 }
 
-static int	split3(unsigned long long n, int s, t_flags elem)
+static int	split3(int s, t_flags elem)
 {
 	int	i;
 
@@ -38,11 +38,10 @@ static int	split3(unsigned long long n, int s, t_flags elem)
 static int	split2(unsigned long long n, int s, int u, t_flags elem)
 {
 	int	i;
-	int	c;
 
-	i = split3(n, s, elem);
+	i = split3(s, elem);
 	if (n || (!n && elem.accuracy != 0))
-		print_llld(n);
+		print_lllu(n);
 	if (ft_strchr(elem.options, '-') && elem.width)
 	{
 		while (elem.width > s + ((ft_strchr(elem.options, ' ') ||
@@ -60,7 +59,6 @@ static int	print_padding(unsigned long long n, int s, t_flags elem)
 {
 	int	i;
 	int	u;
-	int	j;
 
 	i = 0;
 	if (!ft_strchr(elem.options, '-') && elem.width)

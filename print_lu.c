@@ -6,13 +6,13 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 23:31:12 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 02:20:03 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 21:12:22 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	split3(unsigned long n, int s, t_flags elem)
+static int	split3(int s, t_flags elem)
 {
 	int	i;
 
@@ -36,9 +36,8 @@ static int	split3(unsigned long n, int s, t_flags elem)
 static int	split2(unsigned long n, int s, int u, t_flags elem)
 {
 	int	i;
-	int	c;
 
-	i = split3(n, s, elem);
+	i = split3(s, elem);
 	if (n || (!n && elem.accuracy != 0))
 		print_lllu((unsigned long long)n);
 	if (ft_strchr(elem.options, '-') && elem.width)
@@ -58,7 +57,6 @@ static int	print_padding(unsigned long n, int s, t_flags elem)
 {
 	int	i;
 	int	u;
-	int	j;
 
 	i = 0;
 	if (!ft_strchr(elem.options, '-') && elem.width)

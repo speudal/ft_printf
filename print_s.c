@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 21:45:30 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 15:28:36 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 21:45:19 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int		print_s(va_list ap, t_flags elem)
 		free(s);
 		s = "(null)";
 	}
-	j = ft_strlen(s) > elem.accuracy ? elem.accuracy : ft_strlen(s);
-	while (elem.width && (size_t)(elem.width - i) > j && !(ft_strchr(elem.options, '-')))
+	j = ((int)ft_strlen(s) > elem.accuracy && elem.accuracy != -1) ? elem.accuracy : (int)ft_strlen(s);
+	while (elem.width && elem.width - i > j && !(ft_strchr(elem.options, '-')))
 	{
 		ft_putchar(' ');
 		i++;
@@ -45,8 +45,8 @@ int		print_s(va_list ap, t_flags elem)
 	}
 	else
 		i += (int)write(1, s, ft_strlen((char *)s));
-	j = ft_strlen(s) > elem.accuracy ? elem.accuracy : ft_strlen(s);
-	while (elem.width && (size_t)elem.width > j && ft_strchr(elem.options, '-'))
+	j = ((int)ft_strlen(s) > elem.accuracy && elem.accuracy != -1) ? elem.accuracy : (int)ft_strlen(s);
+	while (elem.width && elem.width > j && ft_strchr(elem.options, '-'))
 	{
 		ft_putchar(' ');
 		elem.width--;

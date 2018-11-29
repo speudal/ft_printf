@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:34:00 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 15:10:15 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 21:14:56 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ static int split3(unsigned int n, int s, t_flags elem)
 	return (i);
 }
 
-static int split2(unsigned int n, int w, int s, int u, t_flags elem)
+static int split2(unsigned int n, int s, int u, t_flags elem)
 {
 	int i;
-	int c;
 
 	i = split3(n, s, elem);
 	if (n || (!n && elem.accuracy != 0))
@@ -55,7 +54,6 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 	int i;
 	int	w;
 	int u;
-	int j;
 
 	i = 0;
 	w = elem.width;
@@ -73,7 +71,7 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 	u = elem.accuracy;
 	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n && w > s && !ft_strchr(elem.options, '0'))
 		ft_putstr("0x");
-	return (i + split2(n, w, s, u, elem));
+	return (i + split2(n, s, u, elem));
 }
 
 int		print_sx(va_list ap, t_flags elem)

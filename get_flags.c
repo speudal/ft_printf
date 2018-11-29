@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:24:55 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/27 19:24:00 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 23:39:46 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_flags			*get_flags(const char *str)
 	while (str[++i])
 		if (str[i] == '%')
 			ct++;
-	if (!(list = (t_flags *)malloc(sizeof(t_flags) * ct)))
+	if (!(list = (t_flags *)malloc(sizeof(t_flags) * (ct + 1))))
 		return (0);
 	return (split_get(list, str));
 }

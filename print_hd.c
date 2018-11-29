@@ -6,15 +6,15 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:37:35 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 02:21:44 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 20:55:27 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	split1(short n, t_flags elem, int *j)
+static int split1(short int n, t_flags elem, int *j)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	if (n > -1)
@@ -37,9 +37,9 @@ static int	split1(short n, t_flags elem, int *j)
 	return (i);
 }
 
-static int	split3(short n, int s, t_flags elem)
+static int split3(short int n, int s, t_flags elem)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (elem.accuracy != -1)
@@ -60,10 +60,9 @@ static int	split3(short n, int s, t_flags elem)
 	return (i);
 }
 
-static int	split2(short n, int s, int u, t_flags elem)
+static int split2(short int n, int s, int u, t_flags elem)
 {
-	int	i;
-	int	c;
+	int i;
 
 	i = split3(n, s, elem);
 	if (!ft_strchr(elem.options, '0') && elem.accuracy == -1 && n < 0)
@@ -72,8 +71,7 @@ static int	split2(short n, int s, int u, t_flags elem)
 		print_llld((long long)n);
 	if (ft_strchr(elem.options, '-') && elem.width)
 	{
-		while (elem.width > s + ((ft_strchr(elem.options, ' ') ||
-				ft_strchr(elem.options, '+')) ? 1 : 0) + (u != -1 ? u - s : 0))
+		while (elem.width > s + ((ft_strchr(elem.options, ' ') || ft_strchr(elem.options, '+')) ? 1 : 0) + (u != -1 ? u - s : 0))
 		{
 			ft_putchar(' ');
 			elem.width--;
@@ -83,22 +81,27 @@ static int	split2(short n, int s, int u, t_flags elem)
 	return (i);
 }
 
-static int	print_padding(short n, int s, t_flags elem)
+static int print_padding(short int n, int s, t_flags elem)
 {
-	int	i;
-	int	u;
-	int	j;
+	int i;
+	int u;
+	int j;
 
 	i = split1(n, elem, &j);
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
 		while (elem.width > s + ((((ft_strchr(elem.options, ' ') ||
-				ft_strchr(elem.options, '+')) && n > 0) || (n < 0
-				&& elem.accuracy != -1) ? 1 : 0) +
-				(elem.accuracy != -1 ? elem.accuracy - s : 0)))
+									ft_strchr(elem.options, '+')) &&
+								   n > 0) ||
+										  (n < 0 && elem.accuracy != -1)
+									  ? 1
+									  : 0) +
+								 (elem.accuracy != -1 ? elem.accuracy - s : 0)))
 		{
 			ft_putchar(ft_strchr(elem.options, '0') &&
-						elem.accuracy == -1 ? '0' : ' ');
+							   elem.accuracy == -1
+						   ? '0'
+						   : ' ');
 			elem.width--;
 			i++;
 		}
@@ -107,11 +110,11 @@ static int	print_padding(short n, int s, t_flags elem)
 	return (i + split2(n, s, u, elem));
 }
 
-int			print_hd(va_list ap, t_flags elem)
+int print_hd(va_list ap, t_flags elem)
 {
-	int		i;
-	short	n;
-	short	cp;
+	int i;
+	short n;
+	short cp;
 
 	i = 1;
 	n = (short)va_arg(ap, int);
@@ -131,6 +134,5 @@ int			print_hd(va_list ap, t_flags elem)
 			i++;
 		}
 	}
-	return (n == 0 && elem.accuracy == 0 ?
-			print_padding(n, i, elem) : i + print_padding(n, i, elem));
+	return (n == 0 && elem.accuracy == 0 ? print_padding(n, i, elem) : i + print_padding(n, i, elem));
 }

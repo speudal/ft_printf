@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:28:48 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 15:54:42 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 20:29:25 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int		field_n(char c, int field)
 	if (field == 1)
 		return (c == '.' || ft_isdigit((int)c));
 	if (field == 2)
-		return (c == 'h' || c == 'l' || c == 'L' || c == 'j');
+		return (c == 'h' || c == 'l' || c == 'L' || c == 'j' || c == 'z');
 	if (field == 3)
-		return ((char)ft_strchr("cdfiopsuxX%", c));
+		return ((char)ft_strchr("cdfiopsuxX%DOU", c));
 	return (0);
 }
 

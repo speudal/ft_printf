@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:30:13 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 01:21:34 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 20:55:19 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	split3(int n, int s, t_flags elem)
 static int	split2(int n, int s, int u, t_flags elem)
 {
 	int	i;
-	int	c;
 
 	i = split3(n, s, elem);
 	if (!ft_strchr(elem.options, '0') && elem.accuracy == -1 && n < 0)

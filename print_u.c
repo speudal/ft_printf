@@ -6,13 +6,13 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 23:21:46 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 02:20:20 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 21:08:23 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int split3(unsigned int n, int s, t_flags elem)
+static int split3(int s, t_flags elem)
 {
 	int i;
 
@@ -36,9 +36,8 @@ static int split3(unsigned int n, int s, t_flags elem)
 static int split2(unsigned int n, int s, int u, t_flags elem)
 {
 	int i;
-	int c;
 
-	i = split3(n, s, elem);
+	i = split3(s, elem);
 	if (n || (!n && elem.accuracy != 0))
 		print_lllu((unsigned long long)n);
 	if (ft_strchr(elem.options, '-') && elem.width)
@@ -56,23 +55,22 @@ static int split2(unsigned int n, int s, int u, t_flags elem)
 static int print_padding(unsigned int n, int s, t_flags elem)
 {
 	int i;
-	int u;
-	int j;
+	int	u;
 
 	i = 0;
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
 		while (elem.width > s + ((((ft_strchr(elem.options, ' ') ||
-									ft_strchr(elem.options, '+')) &&
-								   n > 0)
-									  ? 1
-									  : 0) +
-								 (elem.accuracy != -1 ? elem.accuracy - s : 0)))
+								ft_strchr(elem.options, '+')) &&
+							n > 0)
+						? 1
+						: 0) +
+					(elem.accuracy != -1 ? elem.accuracy - s : 0)))
 		{
 			ft_putchar(ft_strchr(elem.options, '0') &&
-							   elem.accuracy == -1
-						   ? '0'
-						   : ' ');
+					elem.accuracy == -1
+					? '0'
+					: ' ');
 			elem.width--;
 			i++;
 		}

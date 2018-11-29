@@ -6,13 +6,13 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 13:08:51 by tduval            #+#    #+#              #
-#    Updated: 2018/11/28 14:11:47 by tduval           ###   ########.fr        #
+#    Updated: 2018/11/28 21:31:00 by tduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libftprintf.a
 
-CONVS	=	conv.a
+CFLAGS	=	-Wall -Werror -Wextra
 
 SRCS	=	ft_putchar.c		\
 			ft_putstr.c			\
@@ -64,7 +64,7 @@ SRCS	=	ft_putchar.c		\
 			print_hbx.c			\
 			print_hhbx.c		\
 			print_lbx.c			\
-			print_llbx.c		\
+			print_llbx.c
 
 OBJS =	$(SRCS:.c=.o)
 

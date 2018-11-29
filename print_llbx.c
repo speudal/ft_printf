@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:49:38 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/27 18:06:00 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/28 21:23:24 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,83 @@ void	print_lllbx(unsigned long long n)
 	ft_putchar(n % 16 > 9 ? n % 16 + 'A' - 10 : n % 16 + '0');
 }
 
+static int split3(unsigned long n, int s, t_flags elem)
+{
+	int i;
+
+	i = 0;
+	if (elem.accuracy != -1)
+	{
+		if (ft_strchr(elem.options, '#') && n)
+			ft_putstr("0X");
+		while (elem.accuracy-- > s)
+		{
+			ft_putchar('0');
+			i++;
+		}
+	}
+	return (i);
+}
+
+static int split2(unsigned long long n, int s, int u, t_flags elem)
+{
+	int i;
+
+	i = split3(n, s, elem);
+	if (n || (!n && elem.accuracy != 0))
+		print_lllbx((unsigned long long)n);
+	if (ft_strchr(elem.options, '-') && elem.width)
+	{
+		while (elem.width > s + ((ft_strchr(elem.options, ' ') || ft_strchr(elem.options, '+')) ? 1 : 0) + (u != -1 ? u - s : 0))
+		{
+			ft_putchar(' ');
+			elem.width--;
+			i++;
+		}
+	}
+	return (i);
+}
+
+static int print_padding(unsigned long long n, int s, t_flags elem)
+{
+	int i;
+	int	w;
+	int u;
+
+	i = 0;
+	w = elem.width;
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && (elem.width < s || ft_strchr(elem.options, '0')) && n)
+		ft_putstr("0X");
+	if (!ft_strchr(elem.options, '-') && elem.width)
+	{
+		while (elem.width > s + (elem.accuracy != -1 && elem.accuracy > s ? elem.accuracy - s : 0))
+		{
+			ft_putchar(ft_strchr(elem.options, '0') && elem.accuracy == -1 ? '0' : ' ');
+			elem.width--;
+			i++;
+		}
+	}
+	u = elem.accuracy;
+	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 && n && w > s && !ft_strchr(elem.options, '0'))
+		ft_putstr("0X");
+	return (i + split2(n, s, u, elem));
+}
+
 int		print_llbx(va_list ap, t_flags elem)
 {
 	unsigned long long	n;
+	unsigned long long	cp;
 	int					i;
 
 	i = 1;
-	if (ft_strchr(elem.options, '#'))
-	{
-		ft_putstr("0X");
-		i += 2;
-	}
 	n = va_arg(ap, unsigned long long);
-	print_lllbx(n);
-	while (n > 15)
+	cp = n;
+	if (ft_strchr(elem.options, '#') && n)
+		i += 2;
+	while (cp > 15)
 	{
-		n /= 16;
+		cp /= 16;
 		i++;
 	}
-	return (i);
+	return (n == 0 && elem.accuracy == 0 ? print_padding(n, 0, elem) : i + print_padding(n, i, elem));
 }
