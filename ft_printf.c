@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 01:41:58 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 01:51:09 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,26 +144,31 @@ static void	free_whole(t_flags *list, int ct)
 	}
 }*/
 
+static int	sub2(const char *format)
+{
+	if (format[0] && format[0] == '%')
+		return (0);
+	else
+		return ((int)write(1, format, ft_strlen(format)));
+}
+
 int			ft_printf(const char *format, ...)
 {
 	t_flags	*list;
 	va_list	ap;
 	int		res;
 	int		ct;
-	int		u;
 	int		i;
 
 	list = 0;
-	u = 0;
 	res = 0;
 	ct = 0;
 	i = 0;
 	if (ft_strlen(format) < 2)
-		return ((int)write(1, format, ft_strlen(format)));
+		return (sub2(format));
 	va_start(ap, format);
 	if (!(list = get_flags(format)))
 		return (-1);
-	u = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
