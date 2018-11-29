@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 04:01:07 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 04:02:53 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,8 +201,9 @@ int			ft_printf(const char *format, ...)
 			i++;
 		}
 	}
-	free_whole(list, ct);/*
-	free(list);*/
+	free_whole(list, ct);
+	if (list)
+		free(list);
 	va_end(ap);
 	return (res);
 }
