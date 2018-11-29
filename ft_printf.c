@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 01:32:22 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 01:41:58 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,16 @@ int		dispatcher(t_flags elem, va_list ap)
 		i += 3;
 	if ((!(ft_strcmp(elem.size, "ll")) || !(ft_strcmp(elem.size, "j"))) && elem.conv != '%')
 		i += 4;
-	if ((!(ft_strcmp(elem.size, "z")) && elem.conv == 'd'))
+	if ((!(ft_strcmp(elem.size, "z")) && (elem.conv == 'd' || elem.conv == 'i')))
 		return (print_lld(ap, elem));
+	if ((!(ft_strcmp(elem.size, "z")) && elem.conv == 'u'))
+		return (print_llu(ap, elem));
+	if ((!(ft_strcmp(elem.size, "z")) && elem.conv == 'o'))
+		return (print_llo(ap, elem));
+	if ((!(ft_strcmp(elem.size, "z")) && elem.conv == 'x'))
+		return (print_llsx(ap, elem));
+	if ((!(ft_strcmp(elem.size, "z")) && elem.conv == 'X'))
+		return (print_llbx(ap, elem));
 	if (elem.conv == '%')
 		return (print_per(elem));
 	return (g_array_print[i] ? g_array_print[i](ap, elem) : 0);
