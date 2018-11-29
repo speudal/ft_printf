@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 02:01:27 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 02:06:09 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,20 +173,22 @@ int			ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (!check_sizes(list[ct].size, list[ct].conv)){
-			if (list[ct].conv == '%')
+			if (!check_sizes(list[ct].size, list[ct].conv))
 			{
-				res += dispatcher(list[ct], ap);
-				i++;
-				while (format[i] != '%')
+				if (list[ct].conv == '%')
+				{
+					res += dispatcher(list[ct], ap);
 					i++;
+					while (format[i] != '%')
+						i++;
+				}
+				else
+				{
+					res += dispatcher(list[ct], ap);
+					while (!ft_strchr("cdfiopsuxXDOU", format[i]) && format[i])
+						i++;
+				}
 			}
-			else
-			{
-				res += dispatcher(list[ct], ap);
-				while (!ft_strchr("cdfiopsuxXDOU", format[i]) && format[i])
-					i++;
-			}}
 			i++;
 			ct++;
 		}

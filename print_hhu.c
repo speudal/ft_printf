@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 23:29:23 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 21:11:58 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 02:34:36 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	print_padding(unsigned char n, int s, t_flags elem)
 				(elem.accuracy != -1 ? elem.accuracy - s : 0)))
 		{
 			ft_putchar(ft_strchr(elem.options, '0') &&
-						elem.accuracy == -1 ? '0' : ' ');
+						elem.accuracy > s ? '0' : ' ');
 			elem.width--;
 			i++;
 		}
@@ -90,5 +90,5 @@ int		print_hhu(va_list ap, t_flags elem)
 		i++;
 	}
 	return (n == 0 && elem.accuracy == 0 ?
-		print_padding(n, i, elem) : i + print_padding(n, i, elem));
+		print_padding(n, 0, elem) : i + print_padding(n, i, elem));
 }

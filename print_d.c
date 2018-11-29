@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:30:13 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 20:55:19 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 02:53:12 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ static int	print_padding(int n, int s, t_flags elem)
 	{
 		while (elem.width > s + ((((ft_strchr(elem.options, ' ') ||
 				ft_strchr(elem.options, '+')) && n > 0) || (n < 0
-				&& elem.accuracy != -1) ? 1 : 0) +
-				(elem.accuracy != -1 ? elem.accuracy - s : 0)))
+				&& elem.accuracy > s - 1) ? 1 : 0) +
+				(elem.accuracy > s ? elem.accuracy - s : 0)))
 		{
 			ft_putchar(ft_strchr(elem.options, '0') &&
 						elem.accuracy == -1 ? '0' : ' ');
@@ -131,5 +131,5 @@ int			print_d(va_list ap, t_flags elem)
 		}
 	}
 	return (n == 0 && elem.accuracy == 0 ?
-			print_padding(n, i, elem) : i + print_padding(n, i, elem));
+			print_padding(n, 0, elem) : i + print_padding(n, i, elem));
 }
