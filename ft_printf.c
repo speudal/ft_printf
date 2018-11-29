@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 03:15:56 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/29 04:01:07 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int		dispatcher(t_flags elem, va_list ap)
 		return (print_per(elem));
 	return (g_array_print[i] ? g_array_print[i](ap, elem) : 0);
 }
-/*
+
 static void	free_whole(t_flags *list, int ct)
 {
 	int		i;
@@ -138,11 +138,13 @@ static void	free_whole(t_flags *list, int ct)
 	i = 0;
 	while (i < ct)
 	{
+		if (list[i].options)
 			free(list[i].options);
+		if (list[i].size)
 			free(list[i].size);
 		i++;
 	}
-}*/
+}
 
 static int	sub2(const char *format)
 {
@@ -199,7 +201,7 @@ int			ft_printf(const char *format, ...)
 			i++;
 		}
 	}
-	/*free_whole(list, ct);
+	free_whole(list, ct);/*
 	free(list);*/
 	va_end(ap);
 	return (res);
