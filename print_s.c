@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 21:45:30 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 03:33:07 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/30 04:24:00 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		print_s(va_list ap, t_flags elem)
 	j = ((int)ft_strlen(s) > elem.accuracy && elem.accuracy != -1) ? elem.accuracy : (int)ft_strlen(s);
 	while (elem.width && elem.width - i > j && !(ft_strchr(elem.options, '-')))
 	{
-		ft_putchar(' ');
+		ft_putchar(ft_strchr(elem.options, '0') ? '0' : ' ');
 		i++;
 	}
 	j = 0;

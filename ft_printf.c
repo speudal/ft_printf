@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 04:02:53 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/30 04:20:23 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ static int	sub2(const char *format)
 	else
 		return ((int)write(1, format, ft_strlen(format)));
 }
+#include <stdio.h>
 
 int			ft_printf(const char *format, ...)
 {
