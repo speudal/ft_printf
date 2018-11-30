@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:28:48 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 02:47:37 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/30 04:34:25 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		field_n(char c, int field)
 	if (field == 2)
 		return (c == 'h' || c == 'l' || c == 'L' || c == 'j' || c == 'z');
 	if (field == 3)
-		return ((char)ft_strchr("cdfiopsuxX%DOU", c));
+		return ((char)ft_strchr("cdfiopsuxX%DOUSC", c));
 	return (0);
 }
 
@@ -36,7 +36,7 @@ static t_flags	split_fill(const char *str, int *i, t_flags elem)
 	int	j;
 
 	j = 0;
-	while (field_n(str[*i], 0))
+	while (field_n(str[*i], 0) && str[*i])
 	{
 		if (!ft_strchr(elem.options, str[*i]))
 		{
@@ -46,7 +46,7 @@ static t_flags	split_fill(const char *str, int *i, t_flags elem)
 		(*i)++;
 	}
 	elem.width = ft_atoi(str + *i);
-	while (ft_isdigit(str[*i]))
+	while (ft_isdigit(str[*i]) && str[*i])
 		(*i)++;
 	if (str[*i] == '.')
 	{
