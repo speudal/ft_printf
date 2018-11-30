@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:35:52 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 03:14:13 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/30 05:06:56 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int print_padding(unsigned short n, int s, t_flags elem)
 		ft_putstr("0x");
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
-		while (elem.width > s + (elem.accuracy > s ? elem.accuracy - s : 0))
+		while (elem.width > s + (elem.accuracy > s ? elem.accuracy - s + (ft_strchr(elem.options, '#') ?     2 : 0): 0))
 		{
 			ft_putchar(ft_strchr(elem.options, '0') && elem.accuracy == -1 ? '0' : ' ');
 			elem.width--;
@@ -86,7 +86,8 @@ int		print_hsx(va_list ap, t_flags elem)
 	n = (unsigned short)va_arg(ap, unsigned int);
 	cp = n;
 	if (ft_strchr(elem.options, '#') && (elem.width < 1 || n))
-		i += 2;
+		if (elem.accuracy || n)
+			i += 2;
 	if (ft_strchr(elem.options, '#') && !n && elem.width < 1 && elem.accuracy == -1)
 		return ((int)write(1, "0", 1));
 	while (cp > 15)
