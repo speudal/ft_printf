@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:47:48 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 02:37:20 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/30 02:14:22 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int print_o(va_list ap, t_flags elem)
 
 	i = 1;
 	n = va_arg(ap, unsigned int);
-	if (ft_strchr(elem.options, '#'))
+	if (ft_strchr(elem.options, '#') && (elem.width < 1 || n))
 		i++;
-	if (ft_strchr(elem.options, '#') && !n)
+	if (ft_strchr(elem.options, '#') && !n && elem.width < 1)
 		return ((int)write(1, "0", 1));
 	cp = n;
 	while (cp > 7)

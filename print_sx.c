@@ -6,10 +6,11 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:34:00 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/28 21:14:56 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/30 03:56:42 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libftprintf.h"
 
 static int split3(unsigned int n, int s, t_flags elem)
@@ -21,7 +22,7 @@ static int split3(unsigned int n, int s, t_flags elem)
 	{
 		if (ft_strchr(elem.options, '#') && n)
 			ft_putstr("0x");
-		while (elem.accuracy-- > s)
+		while (elem.accuracy-- > s - (ft_strchr(elem.options, '#') && n ? 2 : 0))
 		{
 			ft_putchar('0');
 			i++;
@@ -61,7 +62,7 @@ static int print_padding(unsigned int n, int s, t_flags elem)
 		ft_putstr("0x");
 	if (!ft_strchr(elem.options, '-') && elem.width)
 	{
-		while (elem.width > s + (elem.accuracy != -1 && elem.accuracy > s ? elem.accuracy - s : 0))
+		while (elem.width > s + (elem.accuracy > s ? elem.accuracy - s : 0))
 		{
 			ft_putchar(ft_strchr(elem.options, '0') && elem.accuracy == -1 ? '0' : ' ');
 			elem.width--;
@@ -83,8 +84,10 @@ int		print_sx(va_list ap, t_flags elem)
 	i = 1;
 	n = va_arg(ap, unsigned int);
 	cp = n;
-	if (ft_strchr(elem.options, '#') && n)
+	if (ft_strchr(elem.options, '#') && (elem.width < 1 || n))
 		i += 2;
+	if (ft_strchr(elem.options, '#') && !n && elem.width < 1 && elem.accuracy == -1)
+		return ((int)write(1, "0", 1));
 	while (cp > 15)
 	{
 		cp /= 16;
