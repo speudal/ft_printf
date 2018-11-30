@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:28:48 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 04:34:25 by tduval           ###   ########.fr       */
+/*   Updated: 2018/11/30 04:38:47 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		field_n(char c, int field)
 	if (field == 2)
 		return (c == 'h' || c == 'l' || c == 'L' || c == 'j' || c == 'z');
 	if (field == 3)
-		return ((char)ft_strchr("cdfiopsuxX%DOUSC", c));
+		return ((char)ft_strchr("cdfiopsuxX%DOU", c));
 	return (0);
 }
 
@@ -75,7 +75,7 @@ t_flags			fill_flags(const char *str)
 	elem = split_fill(str, &i, elem);
 	while (ft_isdigit(str[i]))
 		i++;
-	while (!field_n(str[i], 3) && str[i])
+	while (field_n(str[i], 2) && str[i])
 	{
 		elem.size[j] = str[i];
 		i++;
