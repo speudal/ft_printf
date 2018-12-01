@@ -6,65 +6,72 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 13:08:51 by tduval            #+#    #+#              #
-#    Updated: 2018/11/28 21:31:00 by tduval           ###   ########.fr        #
+#    Updated: 2018/12/01 00:19:33 by tduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libftprintf.a
 
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -I.
 
-SRCS	=	ft_putchar.c		\
-			ft_putstr.c			\
-			ft_putnbr.c			\
-			ft_strlen.c			\
-			ft_strdup.c			\
-			ft_isdigit.c		\
-			ft_strchr.c			\
-			ft_atoi.c			\
-			ft_strcmp.c			\
-			ft_strncpy.c		\
-			ft_memchr.c			\
-			ft_strnew.c			\
-			ft_memalloc.c		\
-			ft_memset.c			\
-			fill_flags.c		\
-			get_flags.c			\
-			ft_printf.c			\
-			print_c.c			\
-			print_s.c			\
-			print_p.c			\
-			print_per.c			\
-			print_d.c			\
-			print_hd.c			\
-			print_hhd.c			\
-			print_ld.c			\
-			print_lld.c			\
-			print_i.c			\
-			print_hi.c			\
-			print_hhi.c			\
-			print_li.c			\
-			print_lli.c			\
-			print_o.c			\
-			print_ho.c			\
-			print_hho.c			\
-			print_lo.c			\
-			print_llo.c			\
-			print_u.c			\
-			print_hu.c			\
-			print_hhu.c			\
-			print_lu.c			\
-			print_llu.c			\
-			print_sx.c			\
-			print_hsx.c			\
-			print_hhsx.c		\
-			print_lsx.c			\
-			print_llsx.c		\
-			print_bx.c			\
-			print_hbx.c			\
-			print_hhbx.c		\
-			print_lbx.c			\
-			print_llbx.c
+SRCS	=	ft_printf.c					\
+			./libft/ft_putchar.c		\
+			./libft/ft_putstr.c			\
+			./libft/ft_memdel.c			\
+			./libft/ft_putnbr.c			\
+			./libft/ft_strlen.c			\
+			./libft/ft_strdup.c			\
+			./libft/ft_isdigit.c		\
+			./libft/ft_strchr.c			\
+			./libft/ft_atoi.c			\
+			./libft/ft_strcmp.c			\
+			./libft/ft_strncpy.c		\
+			./libft/ft_memchr.c			\
+			./libft/ft_strnew.c			\
+			./libft/ft_memalloc.c		\
+			./libft/ft_memset.c			\
+			./srcs/dispatcher.c			\
+			./srcs/fill_flags.c			\
+			./srcs/get_flags.c			\
+			./srcs/print_c.c			\
+			./srcs/print_s.c			\
+			./srcs/print_p.c			\
+			./srcs/print_per.c			\
+			./srcs/print_d.c			\
+			./srcs/print_hd.c			\
+			./srcs/print_hhd.c			\
+			./srcs/print_ld.c			\
+			./srcs/print_lld.c			\
+			./srcs/print_i.c			\
+			./srcs/print_hi.c			\
+			./srcs/print_hhi.c			\
+			./srcs/print_li.c			\
+			./srcs/print_lli.c			\
+			./srcs/print_o.c			\
+			./srcs/print_ho.c			\
+			./srcs/print_hho.c			\
+			./srcs/print_lo.c			\
+			./srcs/print_llo.c			\
+			./srcs/print_u.c			\
+			./srcs/print_hu.c			\
+			./srcs/print_hhu.c			\
+			./srcs/print_lu.c			\
+			./srcs/print_llu.c			\
+			./srcs/print_sx.c			\
+			./srcs/print_hsx.c			\
+			./srcs/print_hhsx.c			\
+			./srcs/print_lsx.c			\
+			./srcs/print_llsx.c			\
+			./srcs/print_bx.c			\
+			./srcs/print_hbx.c			\
+			./srcs/print_hhbx.c			\
+			./srcs/print_lbx.c			\
+			./srcs/print_llbx.c			\
+			./paddings/padding_d.c		\
+			./paddings/padding_u.c		\
+			./paddings/padding_o.c		\
+			./paddings/padding_sx.c		\
+			./paddings/padding_bx.c
 
 OBJS =	$(SRCS:.c=.o)
 
