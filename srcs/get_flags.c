@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:24:55 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 23:46:31 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/01 02:55:45 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_flags	*split_get(int *t, t_flags *list, const char *str)
 	int	p;
 
 	(*t) = 0;
+	p = 0;
 	i = -1;
 	while (str[++i])
 	{
