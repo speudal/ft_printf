@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:40:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/12/01 01:27:47 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/08 05:30:50 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,17 @@ static void	split(int res[4], va_list ap, t_flags *list, const char *format)
 
 static void	split2(const char *format, t_flags *list, va_list ap, int res[4])
 {
-	if (format[res[2]] == '%')
-		split(res, ap, list, format);
-	else
+	int		i;
+
+	i = res[2];
+	while (format[res[2]] != '%' && format[res[2]])
 	{
 		res[0]++;
-		ft_putchar(format[res[2]]);
 		res[2]++;
 	}
+	ft_putstr(ft_strsub(format, i, res[2] - i));
+	if (format[res[2]])
+		split(res, ap, list, format);
 }
 
 int			ft_printf(const char *format, ...)
