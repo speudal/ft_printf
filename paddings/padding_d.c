@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 19:07:16 by tduval            #+#    #+#             */
-/*   Updated: 2018/12/08 04:40:03 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/09 11:24:51 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	split1(int s, long long n, t_flags elem, int *j)
 			*j = 1;
 			i++;
 		}
-		else if (ft_strchr(elem.options, ' ') && n > -1)
+		else if (ft_strchr(elem.options, ' ') && !ft_strchr(elem.options, '+')
+					&& n > -1)
 		{
 			ft_putchar(' ');
 			*j = 1;
