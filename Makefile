@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 13:08:51 by tduval            #+#    #+#              #
-#    Updated: 2018/12/01 00:19:33 by tduval           ###   ########.fr        #
+#    Updated: 2018/12/09 11:04:32 by tduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS	=	ft_printf.c					\
 			./libft/ft_putchar.c		\
 			./libft/ft_putstr.c			\
 			./libft/ft_memdel.c			\
+			./libft/ft_strsub.c			\
 			./libft/ft_putnbr.c			\
 			./libft/ft_strlen.c			\
 			./libft/ft_strdup.c			\

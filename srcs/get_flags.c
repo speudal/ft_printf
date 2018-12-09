@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:24:55 by tduval            #+#    #+#             */
-/*   Updated: 2018/12/01 02:55:45 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/09 11:05:34 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ t_flags			*get_flags(const char *str, int *t)
 	t_flags *list;
 	int		ct;
 	int		i;
-	int		p;
 
 	ct = 0;
 	i = -1;
-	p = 0;
 	while (str[++i])
 		if (str[i] == '%')
 			ct++;

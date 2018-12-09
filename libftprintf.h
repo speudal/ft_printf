@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 13:20:44 by tduval            #+#    #+#             */
-/*   Updated: 2018/12/01 00:23:08 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/09 11:05:16 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void			ft_putchar(char c);
 void			ft_putstr(const char *s);
 size_t			ft_strlen(const char *s);
 void			ft_memdel(void **ap);
+char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
 int				print_c(va_list ap, t_flags elem);
 int				print_s(va_list ap, t_flags elem);

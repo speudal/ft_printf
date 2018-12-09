@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 22:14:23 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 22:53:58 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/09 11:06:01 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,9 @@ int			padding_bx(unsigned long long n, int s, t_flags elem)
 {
 	int i;
 	int	w;
-	int	q;
 	int u;
 
 	i = 0;
-	q = 0;
 	w = elem.width;
 	if (ft_strchr(elem.options, '#') && elem.accuracy == -1 &&
 			(elem.width < s || ft_strchr(elem.options, '0')) && n)
