@@ -6,11 +6,10 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 21:40:47 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/29 03:50:30 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/12 21:12:26 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include <unistd.h>
 #include "libftprintf.h"
 
@@ -21,6 +20,8 @@ int		print_c(va_list ap, t_flags elem)
 	int		j;
 
 	i = 0;
+	if (elem.width == -1)
+		elem.width = va_arg(ap, int);
 	c = (char)(va_arg(ap, int));
 	while (i < elem.width - 1 && !ft_strchr(elem.options, '-'))
 	{

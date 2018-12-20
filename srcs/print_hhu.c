@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 23:29:23 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 23:16:11 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/12 20:57:28 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		print_hhu(va_list ap, t_flags elem)
 	int				i;
 
 	i = 1;
+	if (elem.width == -1)
+		elem.width = va_arg(ap, int);
 	n = (unsigned char)va_arg(ap, int);
 	cp = n;
 	while (cp > 9)

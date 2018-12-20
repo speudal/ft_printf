@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:27:53 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 23:17:49 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/12 21:13:45 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "libftprintf.h"
 
-void	print_llld(long long n)
+void		print_llld(long long n)
 {
 	if (n == -9223372036854775807 - 1)
 	{
@@ -28,30 +28,37 @@ void	print_llld(long long n)
 	ft_putchar(n % 10 + 48);
 }
 
-int		print_lld(va_list ap, t_flags elem)
+static int	geti(int n)
+{
+	int		i;
+
+	i = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		i++;
+	}
+	while (n > 9)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+int			print_lld(va_list ap, t_flags elem)
 {
 	long long	n;
-	long long	cp;
 	int			i;
 
 	i = 1;
+	if (elem.width == -1)
+		elem.width = va_arg(ap, int);
 	n = va_arg(ap, long long);
-	cp = n;
 	if (n == -9223372036854775807 - 1)
 		i = 20;
 	else
-	{
-		if (cp < 0)
-		{
-			cp *= -1;
-			i++;
-		}
-		while (cp > 9)
-		{
-			cp /= 10;
-			i++;
-		}
-	}
+		i += geti(n);
 	return (n == 0 && elem.accuracy == 0 ?
 	padding_d(n, 0, elem) : i +
 	padding_d(n, i, elem));

@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:37:23 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 23:16:19 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/12 20:57:11 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		print_hhsx(va_list ap, t_flags elem)
 	int				i;
 
 	i = 1;
+	if (elem.width == -1)
+		elem.width = va_arg(ap, int);
 	n = va_arg(ap, unsigned int);
 	cp = n;
 	if (ft_strchr(elem.options, '#') && (elem.width < 1 || n))

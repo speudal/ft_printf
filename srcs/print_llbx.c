@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:49:38 by tduval            #+#    #+#             */
-/*   Updated: 2018/11/30 23:17:15 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/12 21:13:36 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		print_llbx(va_list ap, t_flags elem)
 	int					i;
 
 	i = 1;
+	if (elem.width == -1)
+		elem.width = va_arg(ap, int);
 	n = va_arg(ap, unsigned long long);
 	cp = n;
 	if (ft_strchr(elem.options, '#') && (elem.width > 1 || n))

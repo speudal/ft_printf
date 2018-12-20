@@ -6,19 +6,20 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:24:55 by tduval            #+#    #+#             */
-/*   Updated: 2018/12/09 11:05:34 by tduval           ###   ########.fr       */
+/*   Updated: 2018/12/20 18:58:34 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libftprintf.h"
 
 static t_flags	*split_get(int *t, t_flags *list, const char *str)
 {
-	int	i;
 	int	p;
+	int	i;
 
-	(*t) = 0;
 	p = 0;
+	(*t) = 0;
 	i = -1;
 	while (str[++i])
 	{
